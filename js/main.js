@@ -10,15 +10,65 @@ let dataGlasses = [
     { id: "G9", src: "./img/g9.jpg", virtualImg: "./img/v9.png", brand: "Coarch", name: "MIDNIGHT VIXEN REMIX", color: "Blue, Black", price: 120, description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit consequatur soluta ad aut laborum amet." }
 ];
 
-console.log(dataGlasses);
+// console.log(dataGlasses);
 
-let showGlassesList= () => {
+const ELE = (id) => {
+    return document.querySelector(id);
+  };
+
+
+
+// let showList =  (mang) => {
+//     let content = "";
+//     dataGlasses.map((sp) => {
+//         content += `
+//             <a onclick="showVir(${})" class="col-4"> 
+//                 <img src=${sp.src} style="width:100%; cursor:pointer" />
+//             </a>
+//         `
+//     });
+//     ELE("#vglassesList").innerHTML = `${content}`;
+// }
+
+let showList =  () => {
     let content = "";
     for (const index in dataGlasses) {
-        let glass = dataGlasses[index];
-        content += `
-            <a onclick=""></a>
-        `
+        let idx = dataGlasses[index];
+       content += `
+       <a onclick="showVir(${index})" class="col-4"> 
+        <img src=${idx.src} style="width:100%; cursor:pointer" />
+        </a>
+       `
+    }
+    ELE("#vglassesList").innerHTML = `${content}`;
+}
+showList(dataGlasses)
+
+
+let showVir = (index) => {
+    let contentVir = `
+        <img src="${dataGlasses[index].virtualImg}"/>
+    `
+    ELE("#avatar").innerHTML = `${contentVir}`;
+
+    ELE("#glassesInfo").style.display = "block";    
+    let contentIn4 = `
+        <h5>${dataGlasses[index].name} - ${dataGlasses[index].brand} (${dataGlasses[index].color})</h5>
+        <P style="color:#55ee55"><span style="background-color:red; color: #fff; padding:2px 5px; margin-right: 8px">$${dataGlasses[index].price}</span>Stocking</P> 
+        <p>${dataGlasses[index].description}</p>
+    `
+    ELE("#glassesInfo").innerHTML = `${contentIn4}`;
+}
+window.showVir = showVir;
+
+let removeGlasses = (isValid) => {
+    if(isValid) {
+        ELE("#avatar img").style.display = "block"
+        ELE("#glassesInfo").style.display = "block"
+    }else {
+        ELE("#avatar img").style.display = "none"
+        ELE("#glassesInfo").style.display = "none"
     }
 }
+window.removeGlasses = removeGlasses;
 
